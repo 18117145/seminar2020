@@ -1,0 +1,26 @@
+<html>
+
+<head>
+    <script>
+        function calc() {
+            var a = document.getElementById('trxtfield1').value;
+            a = Number(a);
+            var b = document.getElementById('trxtfield2').value;
+            b = Number(b);
+            var c = a / (a + b) * 100;
+            document.getElementById('trxtfield3').value = c;
+        }
+    </script>
+</head>
+
+<body>
+    勝数：
+    <input id="trxtfield1" type="text">
+    負数：
+    <input id="trxtfield2" type="text">
+    <button onclick="calc()">計算</button>
+    <input id="trxtfield3" type="text">
+
+</body>
+
+</html>
