@@ -1,0 +1,32 @@
+<html>
+
+<head>
+    <script>
+        function calc() {
+            var a = document.getElementById('trxtfield1').value;
+            a = Number(a / 100);
+            var b = document.getElementById('trxtfield2').value;
+            b = Number(b);
+            var c = b / (a + a);
+            document.getElementById('trxtfield3').value = c;
+        }
+    </script>
+</head>
+
+<body>
+    身長：
+    <input id="trxtfield1" type="text">
+    ｃｍ
+
+    体重：
+    <input id="trxtfield2" type="text">
+    ｋｇ
+
+    <button onclick="calc()">計算</button>
+    BMIは
+    <input id="trxtfield3" type="text">
+    です
+
+</body>
+
+</html>
