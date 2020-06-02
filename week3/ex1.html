@@ -1,0 +1,39 @@
+<html lang="ja">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <script>
+        function calc() {
+            var n = 10
+            n = Number(n);
+            var html = '';
+
+            for (var i = 1; i <= n; i++) {
+                var x = Math.floor(Math.random() * 7)
+                html = html + '<li>' + x + '</li>';
+            }
+            document.getElementById('list1').innerHTML = html;
+
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <h1>課題11-1</h1>
+
+    <script src="index.js"></script>
+
+    <button onclick="calc()">乱数生成</button>
+
+    <ul id="list1">
+        <li>+++</li>
+        <li>123</li>
+    </ul>
+
+</body>
+
+</html>
