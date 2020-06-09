@@ -1,0 +1,36 @@
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+
+    <script>
+        function buttonAPressed() {
+            var text = ""
+            var fac = 1;
+            for (var i = 0; i < 10; i++) {
+                var num = (i + 1);
+                fac = fac * num;
+                text = text + '<li>' + fac + '</li>'
+            }
+            document.getElementById("x").innerHTML = text;
+
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <h1>課題11-2</h1>
+
+    <script src="index.js"></script>
+
+    <button onclick="buttonAPressed()">A</button>
+
+    <ul id="x">
+
+    </ul>
+
+</body>
+
+</html>
