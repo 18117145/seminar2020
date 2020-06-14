@@ -5,9 +5,13 @@
     <script>
         function buttonPressed() {
             var text = '';
-            for (var i = 1; i <= 9; i++) {
-                text = text + '<tr><td>' + i + '</td><td>' + i * 2 + '</td><td>' + i * 3 + '</td><td>' + i * 4 + '</td><td>' + i * 5 + '</td><td>' + i * 6 + '</td><td>' + i * 7 + '</td><td>' + i * 8 + '</td><td>' + i * 9 + '</td></tr> '
+            for (var h = 1; h <= 9; h++) {
+                text = text + "<tr>"
 
+                for (var i = 1; i <= 9; i++) {
+                    text = text + '<td>' + i * h + '</td>'
+                }
+                text = text + "</tr>"
             }
 
 

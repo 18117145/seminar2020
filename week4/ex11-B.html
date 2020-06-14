@@ -1,0 +1,59 @@
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+    <script>
+
+        function buttonPressed() {
+            var a = document.getElementById('input-number').value;
+            a = Number(a);
+            var B = 0
+            var C = 0
+            var D = 0
+            var E = 0
+            var F = 0
+            var G = 0
+            for (var i = 1; i <= a; i++) {
+                var x = Math.floor(Math.random() * 6) + 1
+                if (x == 1) {
+                    B = B + 1
+                } else if (x == 2) {
+                    C = C + 1
+                } else if (x == 3) {
+                    D = D + 1
+                } else if (x == 4) {
+                    E = E + 1
+                } else if (x == 5) {
+                    F = F + 1
+                } else if (x == 6) {
+                    G = G + 1
+                }
+            }
+            document.getElementById('output-1').value = B;
+            document.getElementById('output-2').value = C;
+            document.getElementById('output-3').value = D;
+            document.getElementById('output-4').value = E;
+            document.getElementById('output-5').value = F;
+            document.getElementById('output-6').value = G;
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1>課題11-B：乱数の分布調査</h1>
+    試行回数:<input id="input-number" type="text">
+    <button onclick="buttonPressed()">試行</button>
+    <hr>
+    1:<input id="output-1" type="text" value="0"><br>
+    2:<input id="output-2" type="text" value="0"><br>
+    3:<input id="output-3" type="text" value="0"><br>
+    4:<input id="output-4" type="text" value="0"><br>
+    5:<input id="output-5" type="text" value="0"><br>
+    6:<input id="output-6" type="text" value="0"><br>
+
+    <script src="index.js"></script>
+</body>
+
+</html>

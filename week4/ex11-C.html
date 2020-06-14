@@ -1,0 +1,79 @@
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8" />
+
+    <script>
+
+        function buttonPressed() {
+
+            var A = document.getElementById('input-1').value;
+            A = Number(A);
+            var B = document.getElementById('input-2').value;
+            B = Number(B);
+            var C = document.getElementById('input-4').value;
+            C = Number(C);
+            var D = document.getElementById('input-8').value;
+            D = Number(D);
+
+            var E = 0;
+            var F = 0;
+            var G = 0;
+            var H = 0;
+
+            var I = 0;
+
+            if (A == 1) {
+                E = E + 1
+            }
+
+            if (B == 1) {
+                F = F + 2
+            }
+
+            if (C == 1) {
+                G = G + 4
+            }
+
+            if (D == 1) {
+                H = H + 8
+            }
+
+            I = E + F + G + H;
+
+            document.getElementById('output').value = I;
+
+        }
+
+    </script>
+
+
+
+</head>
+
+<body>
+    <h1>課題11-C：2進数から10進数に変換</h1>
+    <select id="input-8">
+        <option value="0">0</option>
+        <option value="1">1</option>
+    </select>
+    <select id="input-4">
+        <option value="0">0</option>
+        <option value="1">1</option>
+    </select>
+    <select id="input-2">
+        <option value="0">0</option>
+        <option value="1">1</option>
+    </select>
+    <select id="input-1">
+        <option value="0">0</option>
+        <option value="1">1</option>
+    </select>
+    <button onclick="buttonPressed()">変換</button>
+    <hr>
+    <input id="output" type="text">
+
+    <script src="index.js"></script>
+</body>
+
+</html>
