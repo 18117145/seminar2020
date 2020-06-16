@@ -3,16 +3,55 @@
 <head>
     <script>
 
+        var A = 1
+        var B = 5
+        var timer;
+        var state = '停止中';
+
         function buttonAPressed() {
+            if (state == '停止中') {
+                timer = setInterval(tick, 1000);
+                state = '動作中';
+            }
         }
 
         function buttonBPressed() {
+            if (state == '動作中') {
+                clearInterval(timer);
+                state = '停止中';
+            }
         }
 
         function buttonMinUpPressed() {
+            A = A + 1;
+            document.getElementById('min').innerHTML = A;
         }
 
         function buttonMinDownPressed() {
+            A = A - 1;
+            document.getElementById('min').innerHTML = A;
+        }
+
+        function tick() {
+            B = B - 1
+            document.getElementById('sec').innerHTML = B;
+            if (B == 0) {
+                A = A - 1;
+                document.getElementById('min').innerHTML = A;
+                B = 59;
+                document.getElementById('sec').innerHTML = B;
+            }
+            if (A < 0) {
+                document.getElementById('min').innerHTML = 0;
+                document.getElementById('sec').innerHTML = 0;
+
+                var ctx = document.getElementById('canvas1').getContext('2d');
+                ctx.clearRect(0, 0, 400, 300);
+                ctx.font = "75px sans-serif";
+                ctx.fillText("時間です！", 20, 75, 200);
+
+            }
+
         }
 
 
