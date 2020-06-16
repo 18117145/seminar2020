@@ -2,7 +2,33 @@
 
 <head>
     <script>
+
+        var x = 5
+        var timer;
+        var state = '停止中';
+
         function buttonAPressed() {
+            if (state == '停止中') {
+                timer = setInterval(tick, 1000);
+                state = '動作中';
+            } else if (state == '動作中') {
+                clearInterval(timer);
+                state = '停止中';
+            }
+        }
+
+        function tick() {
+            x = x - 1
+            document.getElementById('sec').innerHTML = x;
+            if (x <= 0) {
+                document.getElementById('sec').innerHTML = 0;
+
+                var ctx = document.getElementById('canvas1').getContext('2d');
+                ctx.clearRect(0, 0, 400, 300);
+                ctx.font = "75px sans-serif";
+                ctx.fillText("時間です！", 20, 75, 200);
+            }
+
         }
 
     </script>
