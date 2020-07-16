@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <script>
+
+        $(document).ready(init);
+
+        function init() {
+            var userid = window.localStorage.getItem('userid');
+            document.getElementById('account').innerHTML = 'ようこそ' + userid + 'さん';
+
+            // var sql = 'select name,data,time from history order by time desc';
+            // var query = {
+            //     db: 'crecodb',
+            //     userid: userid,
+            //     password: password,
+            //     sql: sql
+            // };
+
+            // var objects = await connect(query);
+            // console.log(objects);
+            // var html = '<ul><tr><td>' + 'アカウント名' + '</td><td>' + '入力文字数' + '</td><td>' + '時間' + '</td></tr></ul>';
+            // html = html + '<ul>';
+            // for (var i = 0; i < objects.length; i++) {
+            //     var object = objects[i];
+            //     html = html + '<tr><td>' + object.name + '</td><td>' + object.data + '</td><td>' + object.time + '</td></tr>';
+            // }
+            // html = html + '</ul>';
+            // document.getElementById('table1').innerHTML = html;
+
+        }
+
+        var userid = window.localStorage.getItem('userid');
+        var password = window.localStorage.getItem('password');
+
+        // var userid = document.getElementById('tf1').value;
+        // var password = document.getElementById('tf2').value;
+        // var tipe = document.getElementById('tf3').value;
+
+        var A = 1
+        var B = 0
+        var timer;
+        var state = '停止中';
+
+
+        async function button1Pressed() {
+
+            if (state == '停止中') {
+                timer = setInterval(tick, 1000);
+                state = '動作中';
+            } else if (state == '動作中') {
+                clearInterval(timer);
+                state = '停止中';
+            } else if (A == 0 & B == 0) {
+                clearInterval(timer);
+                state = '停止中';
+
+            }
+
+            var userid = window.localStorage.getItem('userid');
+            var password = window.localStorage.getItem('password');
+
+            // var userid = document.getElementById('tf1').value;
+            // var password = document.getElementById('tf2').value;
+            // var tipe = document.getElementById('tf3').value;
+
+            var a = Math.floor(Math.random() * 20) + 1;
+
+            var sql = 'select * from flick where id =' + a + ';'
+
+            var query = {
+                db: 'crecodb',
+                userid: userid,
+                password: password,
+                sql: sql
+            };
+
+            var objects = await connect(query);
+            console.log(objects);
+            var html = '';
+            html = html + '<p>';
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                html = html + object.text;
+            }
+            html = html + '</p>';
+            document.getElementById('result').innerHTML = html;
+        }
+
+        var count = 0;
+
+        async function button2Pressed() {
+
+            var userid = window.localStorage.getItem('userid');
+            var password = window.localStorage.getItem('password');
+            // var userid = document.getElementById('tf1').value;
+            // var password = document.getElementById('tf2').value;
+            // var z = document.getElementById('result').value;
+            var question = document.getElementById('result').innerHTML;
+            var answer = document.getElementById('tf3').value;
+            answer = '<p>' + answer + '</p>';
+            console.log(question);
+
+            if (answer == question) {
+
+                var x = question.length;
+
+                count = count + x - 7;
+
+                var a = Math.floor(Math.random() * 20) + 1;
+
+                var sql = 'select * from flick where id =' + a + ';'
+
+                var query = {
+                    db: 'crecodb',
+                    userid: userid,
+                    password: password,
+                    sql: sql
+                };
+
+                var objects = await connect(query);
+                console.log(objects);
+                var html = '';
+                html = html + '<p>';
+                for (var i = 0; i < objects.length; i++) {
+                    var object = objects[i];
+                    html = html + object.text;
+                }
+                html = html + '</p>';
+                document.getElementById('result').innerHTML = html;
+                document.getElementById('tf3').value = '';
+
+            }
+            // else {
+            //     window.alert('違います。');
+            // }
+
+        }
+
+        async function tick() {
+            document.getElementById('sec').innerHTML = B;
+
+            var question = document.getElementById('result').innerHTML;
+            var answer = document.getElementById('tf3').value;
+            question = question.substr(3, question.length - 7);
+
+            var userid = window.localStorage.getItem('userid');
+            var password = window.localStorage.getItem('password');
+
+            if (B == 0) {
+                A = A - 1;
+                document.getElementById('min').innerHTML = A;
+                B = 59;
+                document.getElementById('sec').innerHTML = B;
+            }
+
+            if (A < 0) {
+                document.getElementById('min').innerHTML = 0;
+                document.getElementById('sec').innerHTML = 0;
+                for (var k = 1; k < question.length; k++) {
+                    if (question.substr(0, k) == answer.substr(0, k)) {
+                        count = count + 1;
+                    } else {
+                        count = count;
+                    }
+                }
+                document.getElementById('result').innerHTML = count + '文字打ちました。';
+
+
+                var sql = 'insert into history (name, data, time) values("' + userid + '","' + count + '",now());';
+                var query = {
+                    db: 'crecodb',
+                    userid: userid,
+                    password: password,
+                    sql: sql
+                };
+                var objects = await connect(query);
+                console.log(objects);
+
+                var m = 'select name,data,time from history order by time desc';
+                var n = {
+                    db: 'crecodb',
+                    userid: userid,
+                    password: password,
+                    sql: m
+                };
+
+                var b = await connect(n);
+                console.log(b);
+                var html = '<ul><tr><td>' + 'アカウント名' + '</td><td>' + '入力文字数' + '</td><td>' + '時間' + '</td></tr></ul>';
+                html = html + '<ul>';
+                for (var i = 0; i < b.length; i++) {
+                    var v = b[i];
+                    html = html + '<tr><td>' + v.name + '</td><td>' + v.data + '</td><td>' + v.time + '</td></tr>';
+                }
+                html = html + '</ul>';
+                document.getElementById('table1').innerHTML = html;
+
+                clearInterval(timer);
+                state = '停止中';
+
+                // window.alert(count + '文字打ちました。');
+            }
+
+            B = B - 1;
+        }
+
+        //この関数は変えないこと
+        function connect(query) {
+            return new Promise(function (resolve) {
+                $.post('http://dbkiso.si.aoyama.ac.jp/api/', query, function (data, textStatus) {
+                    var objects = JSON.parse(data);
+                    resolve(objects);
+                });
+            });
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>Flipping</h1>
+    <p id="account"></p>
+    <br>
+    <!-- <input id="tf1" type="textfield">ログイン名
+    <br>
+    <input id="tf2" type="password">パスワード
+    <br> -->
+    <button onclick="button1Pressed()">スタート</button>
+    <span id="min">1</span>:<span id="sec">00</span>
+    <hr>
+    <p id="result"></p>
+    <!-- <table border="1" id="table1">
+        <tr>
+            <td>id</td>
+            <td>text</td>
+        </tr>
+    </table> -->
+
+    <hr>
+    <input id="tf3" type="textfield">
+    <button onclick="button2Pressed()">Go</button>
+
+    <hr>
+    <table border="1" id="table1">
+        <tr>
+            <td>アカウント名</td>
+            <td>入力文字数</td>
+            <td>時間</td>
+        </tr>
+
+    </table>
+
+
+</body>
+
+</html>

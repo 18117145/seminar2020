@@ -9,6 +9,9 @@
             var userid = document.getElementById('tf1').value;
             var password = document.getElementById('tf2').value;
 
+            window.localStorage.setItem('userid', userid);
+            window.localStorage.setItem('password', password);
+
             var sql = 'show tables';
             var query = {
                 db: 'crecodb',
@@ -21,8 +24,13 @@
             if (objects.result && objects.result === 'fail') {
                 window.alert('login failed');
             } else {
-                window.location.href = "http://www.google.com";
+                // window.location.href = "http://www.google.com";
                 // window.location.href = "7-1b.html";
+                // window.location.href = "file:///C:/Users/dai_b/Documents/seminar2020/week7/ex14-twitter2.html";
+                // window.location.href = "file:///C:/Users/dai_b/Documents/seminar2020/week7/ex15.html";
+                window.location.href = "file:///C:/Users/dai_b/Documents/seminar2020/week8/ex16-flick1.html";
+                // window.location.href = "file:///C:/Users/dai_b/Documents/seminar2020/week8/ex16-flick3.html";
+
             }
         }
 
@@ -39,11 +47,12 @@
 </head>
 
 <body>
+    <h1>Flipping</h1>
     <input id="tf1" type="textfield">ログイン名
     <br>
     <input id="tf2" type="password">パスワード
     <br>
-    <button onclick="button1Pressed()">A</button>
+    <button onclick="button1Pressed()">ログイン</button>
 </body>
 
 </html>
