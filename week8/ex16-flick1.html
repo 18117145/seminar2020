@@ -70,9 +70,9 @@
             // var password = document.getElementById('tf2').value;
             // var tipe = document.getElementById('tf3').value;
 
-            var a = Math.floor(Math.random() * 20) + 1;
+            var a = Math.floor(Math.random() * 12) + 1;
 
-            var sql = 'select * from flick where id =' + a + ';'
+            var sql = 'select * from flipping where id =' + a + ';'
 
             var query = {
                 db: 'crecodb',
@@ -113,9 +113,9 @@
 
                 count = count + x - 7;
 
-                var a = Math.floor(Math.random() * 20) + 1;
+                var a = Math.floor(Math.random() * 129) + 1;
 
-                var sql = 'select * from flick where id =' + a + ';'
+                var sql = 'select * from flipping where id =' + a + ';'
 
                 var query = {
                     db: 'crecodb',
@@ -243,8 +243,8 @@
         </tr>
     </table> -->
 
-    <hr>
-    <input id="tf3" type="textfield">
+    <!-- <hr> -->
+    <input id="tf3" type="textfield" size="75">
     <button onclick="button2Pressed()">Go</button>
 
     <hr>
